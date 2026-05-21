@@ -28,10 +28,10 @@ function Nav() {
           <Image
             src="/logo.png"
             alt="Whole Dad Movement"
-            width={48}
-            height={48}
+            width={56}
+            height={56}
             priority
-            className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+            className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
           />
           <span className="font-display text-lg sm:text-xl tracking-widest uppercase text-bone">
             Whole Dad <span className="text-rust">Movement</span>
@@ -694,9 +694,9 @@ function Footer() {
             <Image
               src="/logo.png"
               alt="Whole Dad Movement"
-              width={64}
-              height={64}
-              className="h-14 w-14 object-contain"
+              width={88}
+              height={88}
+              className="h-20 w-20 object-contain"
             />
             <span className="font-display text-2xl uppercase tracking-widest text-bone">
               Whole Dad <span className="text-rust">Movement</span>
