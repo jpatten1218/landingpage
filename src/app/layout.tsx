@@ -23,7 +23,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wholedadmovement.com"),
+  metadataBase: new URL("https://coaching.wholedadmovement.com"),
   title: "Whole Dad Movement — 1:1 Coaching for the Burned-Out Dad",
   description:
     "For the high-achieving dad who's been Day 1 for the 18th week. Stop quitting in private. Build daily standards that hold on your worst day.",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Whole Dad Movement — 1:1 Coaching",
     description:
       "Stop drifting. Stop quitting in private. Daily standards that hold on your worst day.",
-    url: "https://wholedadmovement.com",
+    url: "https://coaching.wholedadmovement.com",
     siteName: "Whole Dad Movement",
     type: "website",
   },

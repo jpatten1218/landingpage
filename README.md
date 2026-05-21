@@ -26,7 +26,7 @@ Open <http://localhost:3000>.
 |---|---|---|
 | `SUPABASE_URL` | Supabase dashboard → Project Settings → API → Project URL | `/api/apply` route |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase dashboard → Project Settings → API → `service_role` (secret) | `/api/apply` route |
-| `NEXT_PUBLIC_SITE_URL` | Your live URL, e.g. `https://wholedadmovement.com` | OG / canonical metadata |
+| `NEXT_PUBLIC_SITE_URL` | Your live URL, e.g. `https://coaching.wholedadmovement.com` | OG / canonical metadata |
 
 > ⚠️ The `service_role` key is **secret** — never commit it, never expose it to the browser. It's only read server-side inside `/api/apply`.
 
@@ -57,13 +57,17 @@ To re-apply or extend the schema, drop a new migration in `supabase/migrations/`
 4. Add the env vars above under **Settings → Environment Variables**.
 5. Deploy.
 
-### Point `wholedadmovement.com` at Vercel
+### Point `coaching.wholedadmovement.com` at Vercel
 
-1. Vercel project → **Settings → Domains** → add `wholedadmovement.com` and `www.wholedadmovement.com`.
-2. Vercel shows DNS records you need. Most commonly:
-   - **A record** on `@` → `76.76.21.21`
-   - **CNAME** on `www` → `cname.vercel-dns.com`
-3. Add those at your registrar. SSL auto-provisions in a few minutes.
+This is set up on the `coaching.` subdomain — the root `wholedadmovement.com` is untouched.
+
+1. Vercel project → **Settings → Domains** → add `coaching.wholedadmovement.com`.
+2. At your registrar, add **one DNS record** on the root zone:
+   - **Type:** `CNAME`
+   - **Name / Host:** `coaching`
+   - **Value / Target:** `cname.vercel-dns.com`
+   - **TTL:** Auto / 3600
+3. Wait 1–10 minutes for propagation. Vercel auto-provisions the SSL cert. Done.
 
 ## Project structure
 
