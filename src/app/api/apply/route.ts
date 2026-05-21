@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { sendApplicationEmail, type ApplicationRecord } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -65,21 +66,37 @@ export async function POST(req: Request) {
       age = body.age;
   }
 
+  const record: ApplicationRecord = {
+    full_name,
+    email,
+    phone,
+    age,
+    role,
+    struggle,
+    story,
+    readiness,
+    investment,
+    consent,
+    user_agent: req.headers.get("user-agent")?.slice(0, 500) ?? null,
+    referer: req.headers.get("referer")?.slice(0, 500) ?? null,
+    submitted_at: new Date().toISOString(),
+  };
+
   try {
     const supabase = getSupabaseAdmin();
     const { error } = await supabase.from("applications").insert({
-      full_name,
-      email,
-      phone,
-      age,
-      role,
-      struggle,
-      story,
-      readiness,
-      investment,
-      consent,
-      user_agent: req.headers.get("user-agent")?.slice(0, 500) ?? null,
-      referer: req.headers.get("referer")?.slice(0, 500) ?? null,
+      full_name: record.full_name,
+      email: record.email,
+      phone: record.phone,
+      age: record.age,
+      role: record.role,
+      struggle: record.struggle,
+      story: record.story,
+      readiness: record.readiness,
+      investment: record.investment,
+      consent: record.consent,
+      user_agent: record.user_agent,
+      referer: record.referer,
     });
 
     if (error) {
@@ -89,13 +106,21 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-
-    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("Apply route error:", err);
+    console.error("Apply route DB error:", err);
     return NextResponse.json(
       { ok: false, error: "Server is misconfigured. Try again later." },
       { status: 500 }
     );
   }
+
+  // Email is best-effort. DB insert already succeeded — never fail the request
+  // on email problems, just log them so they show up in Vercel function logs.
+  try {
+    await sendApplicationEmail(record);
+  } catch (err) {
+    console.error("Email send error (non-fatal):", err);
+  }
+
+  return NextResponse.json({ ok: true });
 }

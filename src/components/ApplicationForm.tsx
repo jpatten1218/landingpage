@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const STRUGGLES = [
   "I&apos;m drifting — I don&apos;t feel like myself anymore",
@@ -90,25 +91,7 @@ export function ApplicationForm() {
   }
 
   if (status === "ok") {
-    return (
-      <div className="brackets border border-rust p-8 lg:p-10">
-        <div className="font-sub uppercase tracking-widest text-rust text-xs">
-          Got it
-        </div>
-        <h3 className="mt-2 font-display text-3xl sm:text-4xl uppercase text-bone leading-tight">
-          Your application is in.
-        </h3>
-        <p className="mt-4 font-body text-bone-dim leading-relaxed">
-          I read every application personally. If we&apos;re a fit, you&apos;ll
-          get a reply from me within 48 hours with a link to book a call. If
-          you don&apos;t hear back inside 72 hours, check your spam — and then
-          email me at <span className="text-bone">josh@wholedadmovement.com</span>.
-        </p>
-        <p className="mt-4 font-sub uppercase tracking-widest text-rust text-sm">
-          Daily is daily. Where your feet are is where you should be.
-        </p>
-      </div>
-    );
+    return <SubmittedScreen />;
   }
 
   return (
@@ -214,6 +197,128 @@ export function ApplicationForm() {
         </p>
       )}
     </form>
+  );
+}
+
+function SubmittedScreen() {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="distress relative overflow-hidden border-2 border-rust bg-deep-black"
+      role="status"
+      aria-live="polite"
+    >
+      {/* Concentric orange rings + radial vignette as a "stamp" backdrop */}
+      <div
+        className="absolute inset-0 rings opacity-60"
+        style={{ backgroundSize: "560px 560px", backgroundPosition: "center" }}
+        aria-hidden
+      />
+      <div className="absolute inset-0 vignette" aria-hidden />
+
+      <div className="relative px-6 py-12 sm:px-12 sm:py-16 text-center">
+        <div className="mx-auto inline-flex items-center justify-center">
+          <Image
+            src="/logo.png"
+            alt="Whole Dad Movement"
+            width={160}
+            height={160}
+            priority
+            className="h-24 w-24 sm:h-32 sm:w-32 object-contain drop-shadow-[0_4px_24px_rgba(216,90,31,0.35)]"
+          />
+        </div>
+
+        <div className="mt-6 inline-flex items-center gap-2 font-sub uppercase tracking-[0.4em] text-rust text-[10px] sm:text-xs">
+          <span className="inline-block h-px w-8 bg-rust" />
+          Application Received
+          <span className="inline-block h-px w-8 bg-rust" />
+        </div>
+
+        <h3 className="mt-5 font-display uppercase text-bone leading-[0.95] text-4xl sm:text-5xl lg:text-6xl">
+          First step.
+          <br />
+          <span className="text-rust">Taken.</span>
+        </h3>
+
+        <p className="mt-6 mx-auto max-w-xl font-sub uppercase tracking-wider text-bone text-base sm:text-lg leading-relaxed">
+          You just did something most guys won&apos;t.
+          <br />
+          Thank you for showing up real.
+        </p>
+
+        <div className="mt-10 mx-auto max-w-xl text-left brackets border border-bone/15 p-5 sm:p-7">
+          <div className="font-sub uppercase tracking-widest text-rust text-xs mb-4">
+            What happens next
+          </div>
+          <ol className="space-y-4">
+            <NextStep
+              n="01"
+              title="I read your application."
+              body="Personally. Every word. Usually today or tomorrow."
+            />
+            <NextStep
+              n="02"
+              title="If we&apos;re a fit — I email you back inside 48 hours."
+              body="With a link to book a real conversation. No automated funnel."
+            />
+            <NextStep
+              n="03"
+              title="If we&apos;re not — you still get a real answer."
+              body="And a pointer to something better suited to where you are."
+            />
+          </ol>
+        </div>
+
+        <p className="mt-8 mx-auto max-w-xl font-body text-bone-dim text-sm leading-relaxed">
+          Watch your inbox &mdash; including spam &mdash; for a reply from{" "}
+          <span className="text-bone">josh@wholedadmovement.com</span>.
+          Haven&apos;t heard back in 72 hours? Email me direct.
+        </p>
+
+        <div className="mt-10 font-sub uppercase tracking-[0.3em] text-rust text-xs sm:text-sm">
+          Daily is daily.
+          <br className="sm:hidden" />
+          <span className="hidden sm:inline"> · </span>
+          Where your feet are is where you should be.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NextStep({
+  n,
+  title,
+  body,
+}: {
+  n: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <li className="flex gap-4">
+      <span className="font-display text-rust text-2xl sm:text-3xl leading-none shrink-0 w-9">
+        {n}
+      </span>
+      <div>
+        <div
+          className="font-sub uppercase tracking-wider text-bone text-sm sm:text-base leading-snug"
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+        <p
+          className="mt-1 font-body text-bone-dim text-sm leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
+      </div>
+    </li>
   );
 }
 
