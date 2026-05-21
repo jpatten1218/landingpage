@@ -77,9 +77,14 @@ export function ApplicationForm() {
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
         error?: string;
+        code?: string;
+        detail?: string;
       };
       if (!res.ok || !data.ok) {
-        setErrorMsg(data.error || "Something went sideways. Try again.");
+        const parts = [data.error || "Something went sideways. Try again."];
+        if (data.code) parts.push(`[${data.code}]`);
+        if (data.detail) parts.push(data.detail);
+        setErrorMsg(parts.join(" "));
         setStatus("error");
         return;
       }

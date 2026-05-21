@@ -24,12 +24,16 @@ function s(v: unknown, max = 2000): string | null {
   return t.slice(0, max);
 }
 
+function fail(error: string, code: string, status = 500) {
+  return NextResponse.json({ ok: false, error, code }, { status });
+}
+
 export async function POST(req: Request) {
   let body: Payload;
   try {
     body = (await req.json()) as Payload;
   } catch {
-    return NextResponse.json({ ok: false, error: "Bad JSON" }, { status: 400 });
+    return fail("Bad JSON", "BAD_JSON", 400);
   }
 
   const full_name = s(body.full_name, 200);
@@ -38,17 +42,11 @@ export async function POST(req: Request) {
   const consent = body.consent === true;
 
   if (!full_name || !email || !story || !consent) {
-    return NextResponse.json(
-      { ok: false, error: "Missing required fields." },
-      { status: 400 }
-    );
+    return fail("Missing required fields.", "BAD_INPUT", 400);
   }
 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    return NextResponse.json(
-      { ok: false, error: "Email looks off." },
-      { status: 400 }
-    );
+    return fail("Email looks off.", "BAD_EMAIL", 400);
   }
 
   const phone = s(body.phone, 40);
@@ -82,6 +80,21 @@ export async function POST(req: Request) {
     submitted_at: new Date().toISOString(),
   };
 
+  // Distinguish "env missing" from "Supabase rejected the insert"
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.error(
+      "[apply] Env missing — SUPABASE_URL set:",
+      !!process.env.SUPABASE_URL,
+      "SUPABASE_SERVICE_ROLE_KEY set:",
+      !!process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+    return fail(
+      "Supabase env vars are missing on the server. Check Vercel env config and redeploy.",
+      "ENV_MISSING",
+      500
+    );
+  }
+
   try {
     const supabase = getSupabaseAdmin();
     const { error } = await supabase.from("applications").insert({
@@ -100,16 +113,27 @@ export async function POST(req: Request) {
     });
 
     if (error) {
-      console.error("Supabase insert error:", error);
+      console.error("[apply] Supabase insert error:", error);
       return NextResponse.json(
-        { ok: false, error: "Could not save application." },
+        {
+          ok: false,
+          error: "Could not save application.",
+          code: "DB_INSERT_FAILED",
+          detail: error.message,
+        },
         { status: 500 }
       );
     }
   } catch (err) {
-    console.error("Apply route DB error:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[apply] DB threw:", msg);
     return NextResponse.json(
-      { ok: false, error: "Server is misconfigured. Try again later." },
+      {
+        ok: false,
+        error: "Server hit an unexpected DB error.",
+        code: "DB_THREW",
+        detail: msg.slice(0, 300),
+      },
       { status: 500 }
     );
   }
@@ -119,7 +143,7 @@ export async function POST(req: Request) {
   try {
     await sendApplicationEmail(record);
   } catch (err) {
-    console.error("Email send error (non-fatal):", err);
+    console.error("[apply] Email send error (non-fatal):", err);
   }
 
   return NextResponse.json({ ok: true });
