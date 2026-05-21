@@ -11,6 +11,7 @@ export default function Home() {
       <TheDrift />
       <Story />
       <GroundFramework />
+      <EightDimensions />
       <OfferBreakdown />
       <NotForYou />
       <FAQ />
@@ -351,25 +352,9 @@ function Story() {
             Now I coach high-capacity, burned-out dads who are quietly drifting.
             I&apos;ve walked the road. I&apos;ll walk it with you.
           </p>
-          <div className="pt-4 border-t border-bone/15 grid grid-cols-3 gap-6">
-            <Stat n="300+ → 230" label="lbs lost" />
-            <Stat n="4" label="kids at home" />
-            <Stat n="20+ yrs" label="married" />
-          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function Stat({ n, label }: { n: string; label: string }) {
-  return (
-    <div>
-      <div className="font-display text-rust text-3xl sm:text-4xl">{n}</div>
-      <div className="font-sub uppercase tracking-widest text-xs text-bone-dim mt-1">
-        {label}
-      </div>
-    </div>
   );
 }
 
@@ -378,39 +363,51 @@ function GroundFramework() {
     {
       letter: "G",
       title: "Grounded Start",
-      body: "5am wake. Same breakfast. Phone in the drawer until you&apos;ve owned the first 90 minutes. Win the morning, win the man.",
+      tagline: "Win the first hour. Set the tone for the day.",
+      body: "How you begin the day decides how you show up. A 30&ndash;45 minute launch sequence: clear the mind, check the compass, set the intention, fuel the body. Agency over urgency.",
+      floor: "2 minutes of stillness with coffee before opening the phone.",
     },
     {
       letter: "R",
-      title: "Reps That Hold",
-      body: "Move daily — not crush daily. Five non-negotiables you can run on four hours of sleep and a sick kid. Standards over hype.",
+      title: "Reset",
+      tagline: "You will drift. The question is how fast you return.",
+      body: "Re-grounding mechanics across the day. Morning, threshold (before walking in the door), evening, and on-demand when triggered. Out of fear-driven reactivity. Back to love-led leadership.",
+      floor: "90-second threshold routine. Three breaths in the driveway.",
     },
     {
       letter: "O",
-      title: "Open the Loop",
-      body: "Stop hiding the relapse. We name it, log it, move on. Shame keeps you on Day 1 forever. Truth lets you start Day 2.",
+      title: "Outlook",
+      tagline: "Presence without purpose is aimless. Purpose without presence is fantasy.",
+      body: "Three horizons of strategic clarity. 90-day vision. ONE Goal this week, declared Sunday. ONE Action today that moves the goal forward. You don&apos;t drift when you know where you&apos;re going.",
+      floor: "Write ONE thing the day is about.",
     },
     {
       letter: "U",
-      title: "Under Identity",
-      body: "&ldquo;Lose 50 lbs&rdquo; is a goal. &ldquo;I&apos;m a man who shows up at 5am whether he feels like it or not&rdquo; is an identity. We anchor the second one.",
+      title: "Undivided",
+      tagline: "Your kids don&apos;t need more of you. They need all of you, in the moments you&apos;re already in.",
+      body: "Presence in the micro-moments that build trust with your family. Morning send-off. Threshold arrival&mdash;family first, phone second. Dinner with the phone in another room. Bedtime. 15 minutes a day with your wife. Eye contact, not multitasking.",
+      floor: "Phone in another room for 15 minutes at dinner.",
     },
     {
       letter: "N",
-      title: "Next Action",
-      body: "Clarity is a verb. Every call ends with one next action — owned, dated, witnessed. No more &ldquo;I need to think about it.&rdquo;",
+      title: "Notice",
+      tagline: "What gets witnessed gets changed.",
+      body: "The awareness layer. Energy tracked through the day. Four-question evening reflection. Sunday GROUND review with the family: &ldquo;What have you noticed about me this week?&rdquo; You can&apos;t fix what you don&apos;t see.",
+      floor: "One thing you&apos;re grateful for. Said out loud.",
     },
     {
       letter: "D",
-      title: "Daily is Daily",
-      body: "Where your feet are is where you should be. Not the highlight reel. Not the Monday reset. Daily. Quiet. Repeatable. Forever.",
+      title: "Discipline",
+      tagline: "You fall to your standards.",
+      body: "The Core 5. One daily non-negotiable from each domain: physical, mental, relational, spiritual, integrity. Maintained regardless of mood. Standards over motivation. Goal: 5 out of 7 days. The chain is the asset.",
+      floor: "Hit one Core 5 floor. No matter what.",
     },
   ];
   return (
     <section className="distress relative bg-deep-black border-b border-bone/10">
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <div className="font-sub text-xs uppercase tracking-[0.4em] text-rust wing-bars-top">
-          The Framework
+          The Operating System
         </div>
         <h2 className="font-display uppercase text-bone leading-[0.95] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
           The way back is called
@@ -418,31 +415,288 @@ function GroundFramework() {
           <span className="text-rust">G.R.O.U.N.D.</span>
         </h2>
         <p className="mt-6 max-w-3xl font-body text-bone-dim text-lg leading-relaxed">
-          Six pillars. One purpose. We build the floor under your feet — the
-          standards that hold whether you&apos;re inspired or exhausted, whether
-          the kid slept or didn&apos;t, whether the quarter hit or missed.
+          Not a routine. Not a wellness practice. Not motivation-dependent.
+          GROUND is a daily operating system &mdash; identity-based,
+          six-pillared, covering the full spectrum of presence:&nbsp;physical,
+          mental, emotional, relational, spiritual.{" "}
+          <span className="text-bone">
+            Built for your worst day, not your best.
+          </span>
         </p>
 
         <div className="mt-14 grid gap-px bg-bone/10 md:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p) => (
-            <div key={p.letter} className="bg-deep-black p-8 brackets">
-              <div className="flex items-baseline gap-4 mb-3">
+            <div key={p.letter} className="bg-deep-black p-7 sm:p-8 brackets">
+              <div className="flex items-baseline gap-4 mb-2">
                 <span className="font-display text-rust text-6xl leading-none">
                   {p.letter}
                 </span>
-                <span className="font-sub uppercase tracking-widest text-bone text-xl">
+                <span className="font-sub uppercase tracking-widest text-bone text-lg sm:text-xl">
                   {p.title}
                 </span>
               </div>
               <p
-                className="font-body text-bone-dim leading-relaxed"
+                className="font-sub uppercase tracking-wider text-rust text-[11px] sm:text-xs leading-snug mb-4"
+                dangerouslySetInnerHTML={{ __html: `&ldquo;${p.tagline}&rdquo;` }}
+              />
+              <p
+                className="font-body text-bone-dim text-sm sm:text-base leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: p.body }}
               />
+              <div className="mt-5 pt-4 border-t border-bone/10">
+                <div className="font-sub uppercase tracking-widest text-bone-dim text-[10px] sm:text-[11px] mb-1">
+                  Worst-day floor
+                </div>
+                <p
+                  className="font-body text-bone text-sm leading-snug"
+                  dangerouslySetInnerHTML={{ __html: p.floor }}
+                />
+              </div>
             </div>
           ))}
         </div>
+
+        <div className="mt-14 border-l-2 border-rust pl-6 max-w-3xl">
+          <p className="font-sub uppercase tracking-wider text-bone text-base sm:text-lg leading-snug">
+            You don&apos;t rise to your goals. You fall to your standards.
+          </p>
+          <p className="mt-2 font-body text-bone-dim leading-relaxed">
+            If a standard doesn&apos;t survive travel, sickness, and stress, it
+            isn&apos;t a standard. It&apos;s a wish. The worst-day floor under
+            each pillar makes the whole system bulletproof.
+            <span className="block mt-3 font-sub uppercase tracking-widest text-rust text-sm">
+              Daily is daily. A 5-minute dose still counts. Skipping doesn&apos;t.
+            </span>
+          </p>
+        </div>
       </div>
     </section>
+  );
+}
+
+function EightDimensions() {
+  const dimensions = [
+    { n: "01", title: "Physical", body: "The body you live in." },
+    { n: "02", title: "Mindset", body: "The mental load and clarity." },
+    { n: "03", title: "Emotional", body: "Regulation, presence, the inner world." },
+    { n: "04", title: "Relational", body: "Marriage, kids, friendships." },
+    { n: "05", title: "Financial", body: "Money as a tool, not a master." },
+    { n: "06", title: "Vocational", body: "Work and calling." },
+    { n: "07", title: "Spiritual", body: "Meaning, faith, the deeper why." },
+    { n: "08", title: "Legacy", body: "What you leave behind." },
+  ];
+  return (
+    <section className="distress relative bg-deep-black border-b border-bone/10">
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
+        <div className="font-sub text-xs uppercase tracking-[0.4em] text-rust wing-bars-top">
+          The Scoreboard
+        </div>
+        <h2 className="font-display uppercase text-bone leading-[0.95] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
+          GROUND is the system.
+          <br />
+          <span className="text-rust">Whole Dad is the scoreboard.</span>
+        </h2>
+        <p className="mt-6 max-w-3xl font-body text-bone-dim text-lg leading-relaxed">
+          GROUND is <em>how</em> you operate. Whole Dad is <em>what</em> you
+          measure. These eight dimensions are the full surface area of a
+          present father &mdash; and the scorecard you check yourself against.
+        </p>
+
+        <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="order-2 lg:order-1">
+            <ul className="grid gap-px bg-bone/10 sm:grid-cols-2">
+              {dimensions.map((d) => (
+                <li
+                  key={d.n}
+                  className="bg-deep-black p-5 sm:p-6 flex gap-4 items-start"
+                >
+                  <span className="font-display text-rust text-2xl sm:text-3xl leading-none shrink-0">
+                    {d.n}
+                  </span>
+                  <div>
+                    <div className="font-sub uppercase tracking-widest text-bone text-base sm:text-lg">
+                      {d.title}
+                    </div>
+                    <p className="mt-1 font-body text-bone-dim text-sm leading-snug">
+                      {d.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="order-1 lg:order-2 flex justify-center">
+            <DimensionsCompass dimensions={dimensions} />
+          </div>
+        </div>
+
+        <div className="mt-14 border-l-2 border-rust pl-6 max-w-3xl">
+          <p className="font-sub uppercase tracking-wider text-bone text-base sm:text-lg leading-snug">
+            You can&apos;t be a whole dad if half of you is dark.
+          </p>
+          <p className="mt-2 font-body text-bone-dim leading-relaxed">
+            Most men optimize one or two of these and pretend the rest don&apos;t
+            count. The body looks fine. The bank account&apos;s growing. Meanwhile
+            the emotional, relational, and spiritual dimensions go dark and the
+            family pays the bill. The scorecard is what keeps you honest.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DimensionsCompass({
+  dimensions,
+}: {
+  dimensions: { n: string; title: string }[];
+}) {
+  // Octagonal compass — 8 vertices around a center, evenly spaced.
+  // viewBox is wider than tall so left/right labels have horizontal room.
+  const cx = 400;
+  const cy = 300;
+  const R = 175; // octagon radius
+  const labelR = 235; // label radius (outside the octagon)
+
+  // Start at 12 o'clock and walk clockwise: 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315°
+  const angles = Array.from({ length: 8 }, (_, i) => (i * Math.PI) / 4 - Math.PI / 2);
+
+  const vertices = angles.map((a) => ({
+    x: cx + R * Math.cos(a),
+    y: cy + R * Math.sin(a),
+  }));
+
+  const labels = angles.map((a, i) => {
+    const lx = cx + labelR * Math.cos(a);
+    const ly = cy + labelR * Math.sin(a);
+    // Anchor labels based on side
+    let anchor: "start" | "middle" | "end" = "middle";
+    const cos = Math.cos(a);
+    if (cos > 0.3) anchor = "start";
+    else if (cos < -0.3) anchor = "end";
+    return { x: lx, y: ly, anchor, n: dimensions[i].n, title: dimensions[i].title };
+  });
+
+  const polygon = (factor: number) =>
+    vertices.map((v) => `${cx + (v.x - cx) * factor},${cy + (v.y - cy) * factor}`).join(" ");
+
+  return (
+    <svg
+      viewBox="0 0 800 600"
+      role="img"
+      aria-label="The eight dimensions of the Whole Dad framework arranged as a compass: Physical, Mindset, Emotional, Relational, Financial, Vocational, Spiritual, Legacy."
+      className="w-full max-w-[560px] h-auto"
+    >
+      {/* Concentric octagons */}
+      <polygon
+        points={polygon(1.0)}
+        fill="none"
+        stroke="#d85a1f"
+        strokeWidth="2"
+        opacity="0.9"
+      />
+      <polygon
+        points={polygon(0.75)}
+        fill="none"
+        stroke="#d85a1f"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+      <polygon
+        points={polygon(0.5)}
+        fill="none"
+        stroke="#d85a1f"
+        strokeWidth="1"
+        opacity="0.25"
+      />
+      <polygon
+        points={polygon(0.25)}
+        fill="none"
+        stroke="#d85a1f"
+        strokeWidth="1"
+        opacity="0.18"
+      />
+
+      {/* 8 spokes */}
+      {vertices.map((v, i) => (
+        <line
+          key={`spoke-${i}`}
+          x1={cx}
+          y1={cy}
+          x2={v.x}
+          y2={v.y}
+          stroke="#d85a1f"
+          strokeWidth="1"
+          opacity="0.35"
+        />
+      ))}
+
+      {/* Vertex dots */}
+      {vertices.map((v, i) => (
+        <circle
+          key={`dot-${i}`}
+          cx={v.x}
+          cy={v.y}
+          r="6"
+          fill="#d85a1f"
+        />
+      ))}
+
+      {/* Center mark */}
+      <circle cx={cx} cy={cy} r="42" fill="#050505" stroke="#d85a1f" strokeWidth="2" />
+      <text
+        x={cx}
+        y={cy - 4}
+        textAnchor="middle"
+        fontFamily="Anton, Impact, sans-serif"
+        fontSize="20"
+        fill="#ede3d2"
+        letterSpacing="2"
+      >
+        WHOLE
+      </text>
+      <text
+        x={cx}
+        y={cy + 16}
+        textAnchor="middle"
+        fontFamily="Anton, Impact, sans-serif"
+        fontSize="20"
+        fill="#d85a1f"
+        letterSpacing="2"
+      >
+        DAD
+      </text>
+
+      {/* Labels */}
+      {labels.map((l, i) => (
+        <g key={`label-${i}`}>
+          <text
+            x={l.x}
+            y={l.y - 6}
+            textAnchor={l.anchor}
+            fontFamily="Oswald, Arial Narrow, sans-serif"
+            fontSize="13"
+            fill="#d85a1f"
+            letterSpacing="2"
+            fontWeight="500"
+          >
+            {l.n}
+          </text>
+          <text
+            x={l.x}
+            y={l.y + 14}
+            textAnchor={l.anchor}
+            fontFamily="Anton, Impact, sans-serif"
+            fontSize="22"
+            fill="#ede3d2"
+            letterSpacing="1.5"
+          >
+            {l.title.toUpperCase()}
+          </text>
+        </g>
+      ))}
+    </svg>
   );
 }
 
