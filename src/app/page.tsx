@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ApplicationForm } from "@/components/ApplicationForm";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <PainValidation />
+      <PainPoints />
       <TheDrift />
       <Story />
       <GroundFramework />
@@ -21,10 +23,17 @@ export default function Home() {
 function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-deep-black/85 backdrop-blur border-b border-bone/10">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         <a href="#top" className="flex items-center gap-3">
-          <span className="inline-block h-6 w-6 border-2 border-rust" />
-          <span className="font-display text-xl tracking-widest uppercase text-bone">
+          <Image
+            src="/logo.png"
+            alt="Whole Dad Movement"
+            width={48}
+            height={48}
+            priority
+            className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+          />
+          <span className="font-display text-lg sm:text-xl tracking-widest uppercase text-bone">
             Whole Dad <span className="text-rust">Movement</span>
           </span>
         </a>
@@ -84,15 +93,15 @@ function Hero() {
         <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 font-sub uppercase tracking-widest text-xs text-bone-dim">
           <span className="flex items-center gap-2">
             <span className="inline-block h-2 w-2 bg-rust" />
-            12 slots open · Q3
+            Application only
           </span>
           <span className="flex items-center gap-2">
             <span className="inline-block h-2 w-2 bg-rust" />
-            12-week container
+            Biweekly 1:1 calls
           </span>
           <span className="flex items-center gap-2">
             <span className="inline-block h-2 w-2 bg-rust" />
-            Daily accountability
+            Text accountability
           </span>
         </div>
       </div>
@@ -146,6 +155,97 @@ function PainValidation() {
           the trunk that hasn&apos;t moved. Every dad I coach has been there.
           So have I.
         </p>
+      </div>
+    </section>
+  );
+}
+
+function PainPoints() {
+  const points = [
+    {
+      headline: "The driveway pause.",
+      body: "You sit in the car at 6pm and need ten minutes before you can walk inside. The kids hear the garage. They don&apos;t hear the door.",
+    },
+    {
+      headline: "Snapping at your wife over nothing.",
+      body: "Then lying in bed running the receipts on her — &ldquo;five things she does wrong&rdquo; — when you know full well it&apos;s not about her. It&apos;s your mental load leaking out sideways.",
+    },
+    {
+      headline: "Hiding the relapse.",
+      body: "The DoorDash bag in the trunk you slid out before she saw it. The drink count you under-report. The gym bag that hasn&apos;t moved since January. The quiet quit on Tuesday no one knows about.",
+    },
+    {
+      headline: "Physically there. Mentally gone.",
+      body: "You&apos;re at the dinner table and you couldn&apos;t tell me what your kid just said. You nod at the right beats. Your phone is glowing in your lap.",
+    },
+    {
+      headline: "&ldquo;Day 1&rdquo; for the 18th week in a row.",
+      body: "You can&apos;t say the words &ldquo;Monday I start&rdquo; out loud anymore without flinching. The folder of unfinished programs is a quiet shame archive.",
+    },
+    {
+      headline: "Successful on paper. Hollow in the chest.",
+      body: "Title&apos;s good. Comp&apos;s good. Kids are good. And you sit there at 2pm and ask, &ldquo;Is this really it?&rdquo; And you feel guilty for asking.",
+    },
+    {
+      headline: "Guilt no matter what you pick.",
+      body: "Work harder &mdash; bad dad. Pull back &mdash; falling behind. Hit the gym &mdash; selfish. Skip the gym &mdash; weak. Nothing feels clean. Everything feels owed.",
+    },
+    {
+      headline: "You don&apos;t recognize yourself.",
+      body: "Old photos. Old voicemails. The way you used to walk into a room. &ldquo;I used to be more driven. More present. More me.&rdquo; You&apos;re not sure where he went.",
+    },
+  ];
+  return (
+    <section className="distress relative bg-deep-black border-b border-bone/10">
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
+        <div className="font-sub text-xs uppercase tracking-[0.4em] text-rust wing-bars-top">
+          The Pain You Don&apos;t Say Out Loud
+        </div>
+        <h2 className="font-display uppercase text-bone leading-[0.95] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
+          If you&apos;ve felt
+          <br />
+          <span className="text-rust">any of this lately —</span>
+          <br />
+          it&apos;s not just you.
+        </h2>
+        <p className="mt-6 max-w-3xl font-body text-bone-dim text-lg leading-relaxed">
+          These are the receipts I&apos;ve seen in every burned-out, high-achieving
+          dad I&apos;ve coached &mdash; including the one I see in the mirror.
+          Run through the list. Mark the ones that land.
+        </p>
+
+        <div className="mt-14 grid gap-px bg-bone/10 md:grid-cols-2">
+          {points.map((p, i) => (
+            <div key={i} className="bg-deep-black p-8 flex gap-5">
+              <div className="font-display text-rust text-3xl leading-none shrink-0 w-10 pt-1">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <div>
+                <h3
+                  className="font-sub uppercase tracking-wider text-bone text-lg sm:text-xl leading-snug"
+                  dangerouslySetInnerHTML={{ __html: p.headline }}
+                />
+                <p
+                  className="mt-3 font-body text-bone-dim leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: p.body }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 border-l-2 border-rust pl-6 max-w-3xl">
+          <p className="font-sub uppercase tracking-wider text-bone text-lg leading-snug">
+            If three or more of those landed, keep reading.
+          </p>
+          <p className="mt-3 font-body text-bone-dim leading-relaxed">
+            You&apos;re not lazy. You&apos;re not broken. You&apos;re not
+            uniquely failing. You&apos;re a high-capacity dad who&apos;s been
+            carrying the weight alone for too long &mdash; and there is a way
+            back. It&apos;s called <span className="text-rust">standards</span>,
+            not motivation. And it&apos;s built for your worst day.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -349,12 +449,12 @@ function GroundFramework() {
 function OfferBreakdown() {
   const items = [
     {
-      label: "Weekly 1:1 calls",
-      body: "60-minute video calls with Josh, every week, for 12 weeks. Plan. Pressure-test. Course-correct.",
+      label: "Biweekly 1:1 calls",
+      body: "60-minute video calls with Josh, every other week. Plan. Pressure-test. Course-correct. Every call ends with one owned next action.",
     },
     {
-      label: "Daily voice accountability",
-      body: "Voxer + text access Mon–Fri. Drop a check-in. Get a real human voice back inside 24 hours. No bots, no AI.",
+      label: "Access by text",
+      body: "Direct text access to me between calls. Drop a check-in, a win, a stuck. I reply same-day. Real human. No bots, no AI auto-responder.",
     },
     {
       label: "Your custom GROUND plan",
@@ -370,7 +470,11 @@ function OfferBreakdown() {
     },
     {
       label: "Private community",
-      body: "Optional access to a small, vetted room of other Whole Dad clients. No cheerleading. No motivational poster energy.",
+      body: "<span class='text-rust font-sub uppercase tracking-widest text-sm'>Coming soon.</span> A small, vetted room of other Whole Dad clients. No cheerleading. No motivational poster energy. Optional access included when it opens.",
+    },
+    {
+      label: "Curated reading list",
+      body: "One book a month, assigned with discussion built into our calls. Real books that move the needle &mdash; <em>Atomic Habits</em>, <em>Essentialism</em>, <em>Boundaries</em>, <em>The Common Rule</em>, and rotating picks based on where you are. We read it. We work it. We don&apos;t just talk about it.",
     },
   ];
   return (
@@ -383,9 +487,9 @@ function OfferBreakdown() {
           The Coaching
         </div>
         <h2 className="font-display uppercase text-bone leading-[0.95] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
-          12 weeks.
+          Coaching plan
           <br />
-          1:1. <span className="text-rust">No fluff.</span>
+          <span className="text-rust">consists of:</span>
         </h2>
 
         <div className="mt-14 grid gap-10 md:grid-cols-2">
@@ -498,23 +602,19 @@ function FAQ() {
     },
     {
       q: "I&apos;ve already tried books, podcasts, and a couple of programs. Why would this be different?",
-      a: "Because you&apos;ve never had a real human in your corner Monday morning when the meeting blew up and you skipped the gym again. Books don&apos;t hold you accountable. Podcasts don&apos;t answer at 6am. This is 12 weeks of someone who will not let you ghost yourself.",
+      a: "Because you&apos;ve never had a real human in your corner Monday morning when the meeting blew up and you skipped the gym again. Books don&apos;t hold you accountable. Podcasts don&apos;t answer at 6am. This is an actual human who will not let you ghost yourself.",
     },
     {
-      q: "How much time will this take per week?",
-      a: "Honest answer: 60 minutes of session, 15–20 minutes a day of habit reps, and a few voice notes back and forth. The standards we build are designed to <em>simplify</em> your week, not stack onto it. If anything, you&apos;ll get hours back.",
+      q: "How much time will this take per month?",
+      a: "Honest answer: two 60-minute biweekly 1:1 calls, 15–20 minutes a day of habit reps, plus a few texts back and forth. The standards we build are designed to <em>simplify</em> your month, not stack onto it. If anything, you&apos;ll get hours back.",
     },
     {
-      q: "What if I miss a week?",
+      q: "What if I miss a call?",
       a: "Then we run it back. Standards bend, not break. I&apos;m not going to shame you off a missed session. I will, however, get on the phone and ask what&apos;s really going on.",
     },
     {
       q: "Is this a Christian coaching thing?",
       a: "I&apos;m a man of faith and it shapes how I show up. But I coach the man, not the doctrine. Plenty of my clients don&apos;t share my faith and we get on great. If faith matters to you, we&apos;ll integrate it. If it doesn&apos;t, we won&apos;t force it.",
-    },
-    {
-      q: "What does it cost?",
-      a: "Shared on the first call after we confirm fit. Investment is in the range of a serious 1:1 container — multiple thousands, not a $97 course. If you&apos;re looking for the cheapest option, this isn&apos;t it.",
     },
   ];
   return (
@@ -590,8 +690,14 @@ function Footer() {
     <footer className="bg-deep-black">
       <div className="mx-auto max-w-6xl px-6 py-16 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block h-6 w-6 border-2 border-rust" />
+          <div className="flex items-center gap-4 mb-4">
+            <Image
+              src="/logo.png"
+              alt="Whole Dad Movement"
+              width={64}
+              height={64}
+              className="h-14 w-14 object-contain"
+            />
             <span className="font-display text-2xl uppercase tracking-widest text-bone">
               Whole Dad <span className="text-rust">Movement</span>
             </span>

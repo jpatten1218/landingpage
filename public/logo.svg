@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Whole Dad Movement">
+  <defs>
+    <filter id="stone" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+    <path id="topArc" d="M 90 256 A 166 166 0 0 1 422 256"/>
+    <path id="bottomArc" d="M 105 256 A 151 151 0 0 0 407 256"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#050505"/>
+
+  <!-- Outer rust ring (thick) and inner ring (thin) -->
+  <circle cx="256" cy="256" r="236" fill="none" stroke="#d85a1f" stroke-width="6"/>
+  <circle cx="256" cy="256" r="222" fill="none" stroke="#d85a1f" stroke-width="2"/>
+
+  <!-- Top text on arc -->
+  <text font-family="Anton, Impact, sans-serif" font-size="34" font-weight="700" fill="#ede3d2" letter-spacing="8">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">
+      WHOLE • DAD • MOVEMENT
+    </textPath>
+  </text>
+
+  <!-- Bottom text on arc -->
+  <text font-family="Anton, Impact, sans-serif" font-size="20" font-weight="700" fill="#ede3d2" letter-spacing="4">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
+      MOVING TOWARD BEING THE BEST DADS WE CAN
+    </textPath>
+  </text>
+
+  <!-- Cardinal dots -->
+  <circle cx="256" cy="62" r="4" fill="#d85a1f"/>
+  <circle cx="256" cy="450" r="4" fill="#d85a1f"/>
+  <circle cx="62" cy="256" r="5" fill="#d85a1f"/>
+  <circle cx="450" cy="256" r="5" fill="#d85a1f"/>
+
+  <!-- Left wing bars -->
+  <g fill="#d85a1f">
+    <polygon points="78,250 138,232 138,250"/>
+    <polygon points="78,262 138,262 138,280"/>
+    <rect x="92" y="232" width="46" height="6"/>
+    <rect x="108" y="246" width="30" height="6"/>
+    <rect x="92" y="268" width="46" height="6"/>
+    <rect x="108" y="282" width="30" height="6"/>
+  </g>
+
+  <!-- Right wing bars (mirror) -->
+  <g fill="#d85a1f">
+    <polygon points="434,250 374,232 374,250"/>
+    <polygon points="434,262 374,262 374,280"/>
+    <rect x="374" y="232" width="46" height="6"/>
+    <rect x="374" y="246" width="30" height="6"/>
+    <rect x="374" y="268" width="46" height="6"/>
+    <rect x="374" y="282" width="30" height="6"/>
+  </g>
+
+  <!-- Tactical peak above WM -->
+  <g fill="#ede3d2" stroke="#050505" stroke-width="2">
+    <polygon points="256,142 240,178 256,170 272,178"/>
+  </g>
+
+  <!-- WM monogram — W in bone, M in rust, sharing a center spine -->
+  <g>
+    <!-- W (bone with stone texture) -->
+    <g fill="#ede3d2">
+      <polygon points="166,170 200,170 224,330 200,330 188,260 176,330 152,330"/>
+      <polygon points="220,170 254,170 248,260 256,330 232,330 224,170"/>
+    </g>
+    <!-- M (rust) -->
+    <g fill="#d85a1f">
+      <polygon points="258,170 292,170 280,260 288,330 264,330 256,170"/>
+      <polygon points="288,170 312,330 336,330 324,260 312,170"/>
+      <polygon points="312,170 336,170 360,330 336,330 324,170"/>
+    </g>
+
+    <!-- Central spine seam -->
+    <rect x="254" y="170" width="4" height="160" fill="#050505"/>
+  </g>
+
+  <!-- Stone distress overlay on monogram + arc text -->
+  <rect x="100" y="100" width="312" height="270" fill="#050505" opacity="0.12" filter="url(#stone)"/>
+</svg>
